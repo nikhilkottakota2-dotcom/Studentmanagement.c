@@ -1,5 +1,47 @@
-#include<stdio.h>
-int main(){
-printf("__Student management__");
-}
+#include <stdio.h>
+#include <string.h>
 
+struct customer {
+    int id;
+    char name[50];
+    float balance;
+};
+
+int main() {
+    struct customer c[3];
+    char search[50];
+    int i, found = 0;
+
+    // Input details
+    for(i = 0; i < 3; i++) {
+        printf("Enter ID: ");
+        scanf("%d", &c[i].id);
+
+        printf("Enter Name: ");
+        scanf("%s", c[i].name);
+
+        printf("Enter Balance: ");
+        scanf("%f", &c[i].balance);
+    }
+
+    // Search name
+    printf("\nEnter name to search: ");
+    scanf("%s", search);
+
+    for(i = 0; i < 3; i++) {
+        if(strcmp(c[i].name, search) == 0) {
+            printf("\nCustomer Found!\n");
+            printf("ID: %d\n", c[i].id);
+            printf("Name: %s\n", c[i].name);
+            printf("Balance: %.2f\n", c[i].balance);
+            found = 1;
+            break;
+        }
+    }
+
+    if(found == 0) {
+        printf("Customer not found\n");
+    }
+
+    return 0;
+}
