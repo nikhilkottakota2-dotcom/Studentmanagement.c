@@ -30,9 +30,7 @@ void addstd() {
 void details() {
     int i;
 
-    if(count == 0) {
-        printf("__No students__\n");
-    }
+    if(count == 0) {                                                            printf("__No students__\n");                                        }
     else {
         for(i = 0; i < count; i++) {
             printf("ID: %d\n", s[i].id);
@@ -43,13 +41,27 @@ void details() {
     }
 }
 
+void search(){
+    int d;
+    char nam[50];
+    printf("Enter Name to Search:");
+    scanf("%s",nam);
+    for(d = 0;d<count;d++){
+        if(strcmp(nam,s[d].name)==0){
+            printf("Name: %s\n",s[d].name);
+            printf("ID: %d\n",s[d].id);
+            printf("Marks:%d\n",s[d].marks);
+            printf("------------------------\n");
+        }
+    }
+}
 int main() {
     int b;
     int a;
 for(b = 0;b<= 12;b++){
     printf("1. Enter 1 for adding students\n");
     printf("2. Enter 2 for details of students\n");
-
+    printf("3. Enter 3 for searching the student\n");
     scanf("%d", &a);
 
     switch(a) {
@@ -60,11 +72,13 @@ for(b = 0;b<= 12;b++){
         case 2:
             details();
             break;
+        case 3:
+        search();
+        break;
 
         default:
             printf("====== Invalid option ======\n");
     }
-    
 }
 
     return 0;
