@@ -1,47 +1,71 @@
-#include <stdio.h>
-#include <string.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
 
-struct customer {
+int count = 0;
+
+struct std {
     int id;
     char name[50];
-    float balance;
+    int marks;
 };
 
-int main() {
-    struct customer c[3];
-    char search[50];
-    int i, found = 0;
+struct std *s = NULL;
 
-    // Input details
-    for(i = 0; i < 3; i++) {
-        printf("Enter ID: ");
-        scanf("%d", &c[i].id);
+void addstd() {
+    count++;
 
-        printf("Enter Name: ");
-        scanf("%s", c[i].name);
+    s = realloc(s, count * sizeof(struct std));
 
-        printf("Enter Balance: ");
-        scanf("%f", &c[i].balance);
+    printf("Enter id: ");
+    scanf("%d", &s[count-1].id);
+
+    printf("Enter name: ");
+    scanf("%s", s[count-1].name);
+
+    printf("Enter marks: ");
+    scanf("%d", &s[count-1].marks);
+}
+
+void details() {
+    int i;
+
+    if(count == 0) {
+        printf("__No students__\n");
     }
-
-    // Search name
-    printf("\nEnter name to search: ");
-    scanf("%s", search);
-
-    for(i = 0; i < 3; i++) {
-        if(strcmp(c[i].name, search) == 0) {
-            printf("\nCustomer Found!\n");
-            printf("ID: %d\n", c[i].id);
-            printf("Name: %s\n", c[i].name);
-            printf("Balance: %.2f\n", c[i].balance);
-            found = 1;
-            break;
+    else {
+        for(i = 0; i < count; i++) {
+            printf("ID: %d\n", s[i].id);
+            printf("Name: %s\n", s[i].name);
+            printf("Marks: %d\n", s[i].marks);
+            printf("----------------\n");
         }
     }
+}
 
-    if(found == 0) {
-        printf("Customer not found\n");
+int main() {
+    int b;
+    int a;
+for(b = 0;b<= 12;b++){
+    printf("1. Enter 1 for adding students\n");
+    printf("2. Enter 2 for details of students\n");
+
+    scanf("%d", &a);
+
+    switch(a) {
+        case 1:
+            addstd();
+            break;
+
+        case 2:
+            details();
+            break;
+
+        default:
+            printf("====== Invalid option ======\n");
     }
+    
+}
 
     return 0;
 }
