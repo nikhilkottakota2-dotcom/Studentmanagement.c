@@ -8,6 +8,7 @@ struct std {
     int id;
     char name[50];
     int marks;
+    char phon[15];
 };
 
 struct std *s = NULL;
@@ -25,43 +26,50 @@ void addstd() {
 
     printf("Enter marks: ");
     scanf("%d", &s[count-1].marks);
+    printf("Enter phone number:");
+    scanf("%s",s[count-1].phon);
 }
 
 void details() {
     int i;
 
-    if(count == 0) {                                                            printf("__No students__\n");                                        }
+    if(count == 0) {
+        printf("__No students__\n");
+    }
     else {
         for(i = 0; i < count; i++) {
             printf("ID: %d\n", s[i].id);
             printf("Name: %s\n", s[i].name);
             printf("Marks: %d\n", s[i].marks);
+            printf("Phone:%s\n",s[i].phon);
             printf("----------------\n");
         }
     }
 }
 
 void search(){
-    int d;
-    char nam[50];
-    printf("Enter Name to Search:");
-    scanf("%s",nam);
-    for(d = 0;d<count;d++){
-        if(strcmp(nam,s[d].name)==0){
-            printf("Name: %s\n",s[d].name);
-            printf("ID: %d\n",s[d].id);
-            printf("Marks:%d\n",s[d].marks);
-            printf("------------------------\n");
-        }
-    }
+int d;
+char nam[50];
+printf("Enter name to search:");
+scanf("%s",nam);
+for(d=0;d<count;d++){
+if(strcmp(nam,s[d].name)==0){
+printf("Name of the student:%s\n",s[d].name);
+printf("Roll no:%d\n",s[d].id);
+printf("Marks:%d\n",s[d].marks);
+printf("Phone:%s\n",s[d].phon);
 }
+}
+}
+
 int main() {
+    int b;
     int a;
 while(1){
     printf("1. Enter 1 for adding students\n");
     printf("2. Enter 2 for details of students\n");
-    printf("3. Enter 3 for searching the student\n");
-printf("4. Enter 4  to exit program\n");
+    printf("3. Enter 3 for search for students\n");
+    printf("4. Enter 4 to exit program\n");
     scanf("%d", &a);
 
     switch(a) {
@@ -73,11 +81,11 @@ printf("4. Enter 4  to exit program\n");
             details();
             break;
         case 3:
-        search();
-        break;
+            search();
+            break;
         case 4:
-        return 0;
-        break;
+             return 0;
+             break;
         default:
             printf("====== Invalid option ======\n");
     }
