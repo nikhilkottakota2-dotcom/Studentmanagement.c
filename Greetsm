@@ -8,7 +8,7 @@ struct std {
     int id;
     char name[50];
     int marks;
-    char phon[15];
+    char phon[15];                                                                                              char mail[30];
 };
 
 struct std *s = NULL;
@@ -28,6 +28,8 @@ void addstd() {
     scanf("%d", &s[count-1].marks);
     printf("Enter phone number:");
     scanf("%s",s[count-1].phon);
+    printf("Enter mail:");
+    scanf("%s",s[count-1].mail);
 }
 
 void details() {
@@ -42,6 +44,7 @@ void details() {
             printf("Name: %s\n", s[i].name);
             printf("Marks: %d\n", s[i].marks);
             printf("Phone:%s\n",s[i].phon);
+            printf("Mail:%s\n",s[i].mail);
             printf("----------------\n");
         }
     }
@@ -58,6 +61,7 @@ printf("Name of the student:%s\n",s[d].name);
 printf("Roll no:%d\n",s[d].id);
 printf("Marks:%d\n",s[d].marks);
 printf("Phone:%s\n",s[d].phon);
+printf("Mail:%s\n",s[d].mail);
 }
 }
 }
