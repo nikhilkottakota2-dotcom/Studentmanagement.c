@@ -62,6 +62,7 @@ for(b = 0;b<= 12;b++){
     printf("1. Enter 1 for adding students\n");
     printf("2. Enter 2 for details of students\n");
     printf("3. Enter 3 for searching the student\n");
+printf("4. Enter 4  to exit program\n);
     scanf("%d", &a);
 
     switch(a) {
@@ -75,7 +76,9 @@ for(b = 0;b<= 12;b++){
         case 3:
         search();
         break;
-
+        case 4:
+        return 0;
+        break;
         default:
             printf("====== Invalid option ======\n");
     }
