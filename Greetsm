@@ -56,7 +56,6 @@ void search(){
     }
 }
 int main() {
-    int b;
     int a;
 while(1){
     printf("1. Enter 1 for adding students\n");
