@@ -8,8 +8,9 @@ struct std {
     int id;
     char name[50];
     int marks;
-    char phon[15];                                                                                              char mail[30];
+    char phon[15];                                                                                                            char mail[30];
 };
+
 
 struct std *s = NULL;
 
