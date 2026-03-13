@@ -58,7 +58,7 @@ void search(){
 int main() {
     int b;
     int a;
-for(b = 0;b<= 12;b++){
+while(1){
     printf("1. Enter 1 for adding students\n");
     printf("2. Enter 2 for details of students\n");
     printf("3. Enter 3 for searching the student\n");
