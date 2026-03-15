@@ -21,10 +21,10 @@ void addstd() {
 
     printf("Enter id: ");
     scanf("%d", &s[count-1].id);
-
+    (void)getchar();
     printf("Enter name: ");
-    scanf("%s", s[count-1].name);
-
+    fgets(s[count-1].name,50,stdin);
+s[count-1].name[strcspn(s[count-1].name,"\n")] = 0;
     printf("Enter marks: ");
     scanf("%d", &s[count-1].marks);
     printf("Enter phone number:");
@@ -52,28 +52,41 @@ void details() {
 }
 
 void search(){
-int d;
-char nam[50];
-printf("Enter name to search:");
-scanf("%s",nam);
-for(d=0;d<count;d++){
-if(strcmp(nam,s[d].name)==0){
-printf("Name of the student:%s\n",s[d].name);
-printf("Roll no:%d\n",s[d].id);
-printf("Marks:%d\n",s[d].marks);
-printf("Phone:%s\n",s[d].phon);
-printf("Mail:%s\n",s[d].mail);
+    int d;
+    char nam[50];
+    int found = 0;
 
+    printf("Enter name to search: ");
+   (void) getchar();
+    fgets(nam,50,stdin);
+    nam[strcspn(nam,"\n")] = 0;
+
+    for(d=0; d<count; d++){
+        if(strcmp(nam,s[d].name)==0){
+
+            printf("Name of the student: %s\n",s[d].name);
+            printf("Roll no: %d\n",s[d].id);
+            printf("Marks: %d\n",s[d].marks);
+            printf("Phone: %s\n",s[d].phon);
+            printf("Mail: %s\n",s[d].mail);
+
+            found = 1;
+        }
+    }
+
+    if(found == 0){
+        printf("Student not found\n");
+    }
 }
-}
-}
+
 void edit(){
     int n,e,ma;
     char nam[50];
     char na[50];
-
+   (void)getchar();
     printf("Enter name to search: ");
-    scanf("%s",nam);
+    fgets(na,50,stdin);
+    na[strcspn(na,"\n")]=0;
 
     for(e=0;e<count;e++){
         if(strcmp(nam,s[e].name)==0){
@@ -124,8 +137,7 @@ while(1){
 
     switch(a) {
         case 1:
-            addstd();
-            break;
+            addstd();                                                                                                                                                 break;
 
         case 2:
             details();
@@ -146,5 +158,3 @@ while(1){
 
     return 0;
 }
-
-
