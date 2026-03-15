@@ -21,15 +21,20 @@ void addstd() {
 
     printf("Enter id: ");
     scanf("%d", &s[count-1].id);
+
     (void)getchar();
+
     printf("Enter name: ");
     fgets(s[count-1].name,50,stdin);
-s[count-1].name[strcspn(s[count-1].name,"\n")] = 0;
+    s[count-1].name[strcspn(s[count-1].name,"\n")] = 0;
+
     printf("Enter marks: ");
     scanf("%d", &s[count-1].marks);
-    printf("Enter phone number:");
+
+    printf("Enter phone number: ");
     scanf("%s",s[count-1].phon);
-    printf("Enter mail:");
+
+    printf("Enter mail: ");
     scanf("%s",s[count-1].mail);
 }
 
@@ -41,12 +46,14 @@ void details() {
     }
     else {
         for(i = 0; i < count; i++) {
+
             printf("ID: %d\n", s[i].id);
             printf("Name: %s\n", s[i].name);
             printf("Marks: %d\n", s[i].marks);
-            printf("Phone:%s\n",s[i].phon);
-            printf("Mail:%s\n",s[i].mail);
+            printf("Phone: %s\n",s[i].phon);
+            printf("Mail: %s\n",s[i].mail);
             printf("----------------\n");
+
         }
     }
 }
@@ -57,11 +64,12 @@ void search(){
     int found = 0;
 
     printf("Enter name to search: ");
-   (void) getchar();
+    (void)getchar();
     fgets(nam,50,stdin);
     nam[strcspn(nam,"\n")] = 0;
 
     for(d=0; d<count; d++){
+
         if(strcmp(nam,s[d].name)==0){
 
             printf("Name of the student: %s\n",s[d].name);
@@ -80,81 +88,110 @@ void search(){
 }
 
 void edit(){
+
     int n,e,ma;
-    char nam[50];
     char na[50];
-   (void)getchar();
+    int found = 0;
+
+    (void)getchar();
+
     printf("Enter name to search: ");
     fgets(na,50,stdin);
-    na[strcspn(na,"\n")]=0;
+    na[strcspn(na,"\n")] = 0;
 
     for(e=0;e<count;e++){
-        if(strcmp(nam,s[e].name)==0){
 
-            printf("Name of the student:%s\n",s[e].name);
-            printf("Roll no:%d\n",s[e].id);
-            printf("Marks:%d\n",s[e].marks);
-            printf("Phone:%s\n",s[e].phon);
-            printf("Mail:%s\n",s[e].mail);
+        if(strcmp(na,s[e].name)==0){
+
+            printf("Name of the student: %s\n",s[e].name);
+            printf("Roll no: %d\n",s[e].id);
+            printf("Marks: %d\n",s[e].marks);
+            printf("Phone: %s\n",s[e].phon);
+            printf("Mail: %s\n",s[e].mail);
 
             printf("\n1. Edit Name\n2. Edit Marks\n");
-            printf("Enter option to edit details: ");
+            printf("Enter option: ");
             scanf("%d",&n);
 
             switch(n){
 
             case 1:
+
+                (void)getchar();
+
                 printf("Enter new name: ");
-                scanf("%s",na);
+                fgets(na,50,stdin);
+                na[strcspn(na,"\n")] = 0;
+
                 strcpy(s[e].name,na);
+
                 printf("Name edited: %s\n",s[e].name);
+
                 break;
 
             case 2:
+
                 printf("Enter new marks: ");
                 scanf("%d",&ma);
+
                 s[e].marks = ma;
+
                 printf("Marks edited: %d\n",s[e].marks);
+
                 break;
 
             default:
                 printf("Invalid option\n");
             }
+
+            found = 1;
         }
+    }
+
+    if(found == 0){
+        printf("Student not found\n");
     }
 }
 
 int main() {
-    int b;
-    int a;
-while(1){
-    printf("1. Enter 1 for adding students\n");
-    printf("2. Enter 2 for details of students\n");
-    printf("3. Enter 3 for search for students\n");
-    printf("4. Enter 4 to edit student details\n");
-    printf("5. Enter 5 to exit program\n");
-    scanf("%d", &a);
 
-    switch(a) {
-        case 1:
-            addstd();                                                                                                                                                 break;
+    int a;
+
+    while(1){
+
+        printf("\n1. Add Student\n");
+        printf("2. Show Details\n");
+        printf("3. Search Student\n");
+        printf("4. Edit Student\n");
+        printf("5. Exit\n");
+
+        printf("Enter option: ");
+        scanf("%d", &a);
+
+        switch(a) {
+                                                                                                                                                                                                                                case 1:
+            addstd();
+            break;
 
         case 2:
             details();
             break;
+
         case 3:
             search();
             break;
+
         case 4:
             edit();
-             break;
+            break;
+
         case 5:
-             return 0;
-             break;
+            return 0;
+
         default:
             printf("====== Invalid option ======\n");
+        }
     }
-}
 
     return 0;
 }
