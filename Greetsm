@@ -14,15 +14,53 @@ struct std {
 
 struct std *s = NULL;
 
+void loadFromFile() {
+    FILE *fp = fopen("students.dat", "rb");
+
+    if(fp == NULL) {
+        printf("No previous data found.\n");
+        return;
+    }
+
+    fread(&count, sizeof(int), 1, fp);
+
+    s = malloc(count * sizeof(struct std));
+    fread(s, sizeof(struct std), count, fp);
+
+    fclose(fp);
+    printf("Data loaded successfully!\n");
+}
+
+void saveToFile() {
+    FILE *fp = fopen("students.dat", "wb");
+
+    if(fp == NULL) {
+        printf("Error saving file!\n");
+        return;
+    }
+
+    fwrite(&count, sizeof(int), 1, fp);
+    fwrite(s, sizeof(struct std), count, fp);
+
+    fclose(fp);
+    printf("Data saved successfully!\n");
+}
+
+
 void addstd() {
     count++;
 
-    s = realloc(s, count * sizeof(struct std));
+    struct std *temp = realloc(s, count * sizeof(struct std));
+    if(temp == NULL) {
+        printf("Memory allocation failed!\n");
+        return;
+    }
+    s = temp;
 
     printf("Enter id: ");
     scanf("%d", &s[count-1].id);
 
-    (void)getchar();
+    getchar();
 
     printf("Enter name: ");
     fgets(s[count-1].name,50,stdin);
@@ -38,6 +76,7 @@ void addstd() {
     scanf("%s",s[count-1].mail);
 }
 
+
 void details() {
     int i;
 
@@ -46,14 +85,12 @@ void details() {
     }
     else {
         for(i = 0; i < count; i++) {
-
             printf("ID: %d\n", s[i].id);
             printf("Name: %s\n", s[i].name);
             printf("Marks: %d\n", s[i].marks);
             printf("Phone: %s\n",s[i].phon);
             printf("Mail: %s\n",s[i].mail);
             printf("----------------\n");
-
         }
     }
 }
@@ -64,51 +101,44 @@ void search(){
     int found = 0;
 
     printf("Enter name to search: ");
-    (void)getchar();
+    getchar();
     fgets(nam,50,stdin);
     nam[strcspn(nam,"\n")] = 0;
 
     for(d=0; d<count; d++){
-
-        if(strstr(nam,s[d].name)==0){
-
-            printf("Name of the student: %s\n",s[d].name);
-            printf("Roll no: %d\n",s[d].id);
+        if(strstr(s[d].name, nam) != NULL){
+            printf("Name: %s\n",s[d].name);
+            printf("ID: %d\n",s[d].id);
             printf("Marks: %d\n",s[d].marks);
             printf("Phone: %s\n",s[d].phon);
             printf("Mail: %s\n",s[d].mail);
-           printf("-----------------------------\n");
+            printf("-----------------------------\n");
             found = 1;
         }
     }
 
     if(found == 0){
         printf("Student not found\n");
-        printf("-----------------------------\n");
     }
 }
 
 void edit(){
-
     int n,e,ma;
     char na[50];
     int found = 0;
 
-    (void)getchar();
+    getchar();
 
     printf("Enter name to search: ");
     fgets(na,50,stdin);
     na[strcspn(na,"\n")] = 0;
 
     for(e=0;e<count;e++){
-
         if(strcmp(na,s[e].name)==0){
 
-            printf("Name of the student: %s\n",s[e].name);
-            printf("Roll no: %d\n",s[e].id);
+            printf("Name: %s\n",s[e].name);
+            printf("ID: %d\n",s[e].id);
             printf("Marks: %d\n",s[e].marks);
-            printf("Phone: %s\n",s[e].phon);
-            printf("Mail: %s\n",s[e].mail);
 
             printf("\n1. Edit Name\n2. Edit Marks\n");
             printf("Enter option: ");
@@ -117,28 +147,19 @@ void edit(){
             switch(n){
 
             case 1:
-
-                (void)getchar();
-
+                getchar();
                 printf("Enter new name: ");
                 fgets(na,50,stdin);
                 na[strcspn(na,"\n")] = 0;
-
                 strcpy(s[e].name,na);
-
-                printf("Name edited: %s\n",s[e].name);
-
+                printf("Name updated!\n");
                 break;
 
             case 2:
-
                 printf("Enter new marks: ");
                 scanf("%d",&ma);
-
                 s[e].marks = ma;
-
-                printf("Marks edited: %d\n",s[e].marks);
-
+                printf("Marks updated!\n");
                 break;
 
             default:
@@ -154,9 +175,12 @@ void edit(){
     }
 }
 
+
 int main() {
 
     int a;
+
+    loadFromFile();  
 
     while(1){
 
@@ -164,7 +188,8 @@ int main() {
         printf("2. Show Details\n");
         printf("3. Search Student\n");
         printf("4. Edit Student\n");
-        printf("5. Exit\n");
+        printf("5. Save Data\n");
+        printf("6. Exit\n");
 
         printf("Enter option: ");
         scanf("%d", &a);
@@ -188,6 +213,11 @@ int main() {
             break;
 
         case 5:
+            saveToFile();
+            break;
+
+        case 6:
+            saveToFile(); 
             return 0;
 
         default:
