@@ -70,7 +70,7 @@ void search(){
 
     for(d=0; d<count; d++){
 
-        if(strcmp(nam,s[d].name)==0){
+        if(strstr(nam,s[d].name)==0){
 
             printf("Name of the student: %s\n",s[d].name);
             printf("Roll no: %d\n",s[d].id);
