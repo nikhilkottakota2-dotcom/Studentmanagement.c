@@ -77,13 +77,14 @@ void search(){
             printf("Marks: %d\n",s[d].marks);
             printf("Phone: %s\n",s[d].phon);
             printf("Mail: %s\n",s[d].mail);
-
+           printf("-----------------------------\n");
             found = 1;
         }
     }
 
     if(found == 0){
         printf("Student not found\n");
+        printf("-----------------------------\n");
     }
 }
 
@@ -169,7 +170,8 @@ int main() {
         scanf("%d", &a);
 
         switch(a) {
-                                                                                                                                                                                                                                case 1:
+
+        case 1:
             addstd();
             break;
 
